@@ -4,10 +4,16 @@ import com.example.restful_test.exception.UserNotFoundException;
 import com.example.restful_test.exception.UserNotSavedException;
 import com.example.restful_test.model.User;
 import com.example.restful_test.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static org.springframework.data.domain.PageRequest.*;
 
 @Service
 public class UserService {
@@ -40,16 +46,13 @@ public class UserService {
         }
     }
 
-    public Iterable<User> findAllUsers() {
-        int size = 0;
-        Iterable<User> users = userRepository.findAll();
-        for (User u: users) {
-            size++;
-        }
-        if (size == 0) {
-            throw new UserNotFoundException("No users");
+    public Iterable<User> findAllUsers(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<User> users = userRepository.findAll(paging);
+        if (users.hasContent()) {
+            return users.getContent();
         } else {
-            return users;
+            throw new UserNotFoundException("No users");
         }
     }
 
