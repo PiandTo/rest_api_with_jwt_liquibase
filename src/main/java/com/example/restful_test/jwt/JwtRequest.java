@@ -1,4 +1,4 @@
-package com.example.restful_test.security;
+package com.example.restful_test.jwt;
 
 import lombok.Getter;
 import lombok.Setter;

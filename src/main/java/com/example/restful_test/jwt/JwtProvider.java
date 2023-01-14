@@ -1,4 +1,4 @@
-package com.example.restful_test.security;
+package com.example.restful_test.jwt;
 
 import com.example.restful_test.model.User;
 import io.jsonwebtoken.*;
@@ -85,11 +85,11 @@ public class JwtProvider {
         return false;
     }
 
-    private Claims getAccessToken (String token) {
+    public Claims getAccessClaims (String token) {
         return getClaims(token, jwtAccessSecret);
     }
 
-    private Claims getRefreshToken (String token) {
+    public Claims getRefreshClaims (String token) {
         return getClaims(token, jwtRefreshSecret);
     }
 

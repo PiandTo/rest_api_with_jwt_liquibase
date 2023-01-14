@@ -76,4 +76,9 @@ public class UserService {
         Optional<User> user = findUserById(id);
         userRepository.deleteById(id);
     }
+
+    public User findByLogin(String login) {
+        User user = userRepository.findByLogin(login);
+        return user;
+    }
 }
