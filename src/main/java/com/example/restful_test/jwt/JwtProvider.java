@@ -4,6 +4,7 @@ import com.example.restful_test.model.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoder;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +22,22 @@ import java.util.Date;
 @Component
 @Slf4j
 public class JwtProvider {
+//    If you want to sign a JWS using HMAC-SHA algorithms and
+//    you have a secret key String or encoded byte array,
+//    you will need to convert it into a SecretKey instance to use as the signWith method argument.
     private final SecretKey jwtAccessSecret;
     private final SecretKey jwtRefreshSecret;
 
     public JwtProvider(
-        @Value("jwt.secret.access") String jwtAccessSecret,
-        @Value("jwt.secret.refresh") String jwtRefreshSecret
+        @Value("${jwt.secret.access}") String jwtAccessSecret,
+        @Value("${jwt.secret.refresh}") String jwtRefreshSecret
     ) {
+//        SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+//        String secretString = Encoders.BASE64.encode(key.getEncoded());
+//        System.out.println(secretString);
+//        SecretKey key2 = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+//        String secretString2 = Encoders.BASE64.encode(key2.getEncoded());
+//        System.out.println(secretString2);
         this.jwtAccessSecret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtAccessSecret));
         this.jwtRefreshSecret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtRefreshSecret));
     }

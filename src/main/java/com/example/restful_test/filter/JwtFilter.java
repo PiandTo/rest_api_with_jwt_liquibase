@@ -20,7 +20,7 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends GenericFilterBean {
-    private JwtProvider jwtProvider;
+    private final JwtProvider jwtProvider;
     private static final String AUTHORIZATION = "Authorization";
 
     @Autowired
