@@ -1,12 +1,11 @@
 package com.example.restful_test.controller;
 
-import com.example.restful_test.exception.UserNotFoundException;
+import com.example.restful_test.exception.course.CourseNotFoundException;
 import com.example.restful_test.model.User;
 import com.example.restful_test.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +43,7 @@ public class UserControler {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(findUser.get());
         }
-        throw new UserNotFoundException("No such user");
+        throw new CourseNotFoundException("No such user");
     }
 
     @PostMapping("users")

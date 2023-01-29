@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @ToString(onlyExplicitlyIncluded=true)
 @Setter
@@ -21,21 +19,21 @@ public class Course extends BaseEntity{
     private String name;
     private String description;
 
-    @ManyToMany()
-    @JoinTable (name = "course_teacher",
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.DETACH })
+    @JoinTable (name = "teachers_courses", schema = "restful",
             joinColumns = {@JoinColumn(name = "course_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "teacher_id", referencedColumnName = "id")})
-    private List<User> teachers = new ArrayList<>();
+    private Set<User> teachers = new HashSet<>();
 
-    @ManyToMany()
-    @JoinTable (name = "course_student",
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.DETACH })
+    @JoinTable (name = "students_courses", schema = "restful",
             joinColumns = {@JoinColumn(name = "course_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id", referencedColumnName = "id")})
-    private List<User> students = new ArrayList<>();
+    private Set<User> students = new HashSet<>();
 
-    @ManyToMany()
-    @JoinTable (name = "course_lesson",
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.DETACH })
+    @JoinTable (name = "lessons_courses", schema = "restful",
         joinColumns = {@JoinColumn(name = "course_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "lesson_id", referencedColumnName = "id")})
-    private List<Lesson> lessons = new ArrayList<>();
+    private Set<Lesson> lessons = new HashSet<>();
 }

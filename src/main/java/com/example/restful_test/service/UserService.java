@@ -1,7 +1,9 @@
 package com.example.restful_test.service;
 
-import com.example.restful_test.exception.UserNotFoundException;
-import com.example.restful_test.exception.UserNotSavedException;
+import com.example.restful_test.exception.course.CourseNotFoundException;
+import com.example.restful_test.exception.course.CourseNotSavedException;
+import com.example.restful_test.exception.user.UserNotFoundException;
+import com.example.restful_test.exception.user.UserNotSavedException;
 import com.example.restful_test.model.User;
 import com.example.restful_test.repository.UserRepository;
 import org.springframework.data.domain.Page;
@@ -13,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static org.springframework.data.domain.PageRequest.*;
-
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -25,7 +25,7 @@ public class UserService {
 
     public User saveUser(User user) {
         if (user == null) {
-            throw new UserNotSavedException("It is no provided user");
+            throw new UserNotFoundException("It is no provided user");
         }
         try {
             return userRepository.save(user);

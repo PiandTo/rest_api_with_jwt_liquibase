@@ -1,4 +1,4 @@
-package com.example.restful_test.exception;
+package com.example.restful_test.exception.user;
 
 public class UserNotSavedException extends RuntimeException{
 

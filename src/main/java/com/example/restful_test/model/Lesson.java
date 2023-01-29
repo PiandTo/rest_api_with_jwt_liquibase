@@ -18,11 +18,13 @@ import java.util.List;
 public class Lesson extends BaseEntity{
     private LocalTime startTime;
     private LocalTime endTime;
-    private String dayOfWeek;
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek dayOfWeek;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.PERSIST })
+    @JoinColumn(name = "teacher_id")
     private User teacher;
 
-    @ManyToMany(mappedBy = "lessons")
+    @ManyToMany(mappedBy = "lessons", cascade = { CascadeType.DETACH, CascadeType.PERSIST })
     private List<Course> courses = new ArrayList<>();
 }

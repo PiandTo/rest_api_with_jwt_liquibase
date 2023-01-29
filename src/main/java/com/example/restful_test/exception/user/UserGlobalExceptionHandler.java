@@ -1,4 +1,4 @@
-package com.example.restful_test.exception;
+package com.example.restful_test.exception.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestControllerAdvice
 public class UserGlobalExceptionHandler {
-
     @ExceptionHandler({HttpMessageNotReadableException.class, MethodArgumentTypeMismatchException.class})
     public ResponseEntity<UserError> handleTypeMismatch(Exception ex) {
         List<String> error = new ArrayList<>();
