@@ -39,7 +39,7 @@ class RestfulTestApplicationTests {
                 .firstName("mikhail")
                 .lastName("malev")
                 .login("snaomi")
-                .role(Role.Student)
+                .role(Role.STUDENT)
                 .password("12345")
                 .build();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -54,7 +54,7 @@ class RestfulTestApplicationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("mikhail"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("malev"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.login").value("snaomi"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("Student"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("STUDENT"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("12345"))
                 .andExpect(status().isCreated()).andReturn().getResponse();
         Integer id = JsonPath.parse(response.getContentAsString()).read("$.id");
@@ -66,7 +66,7 @@ class RestfulTestApplicationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("mikhail"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("malev"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.login").value("snaomi"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("Student"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("STUDENT"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("12345"))
                 .andExpect(status().isOk());
     }
@@ -84,7 +84,7 @@ class RestfulTestApplicationTests {
                 .firstName("Petr")
                 .lastName("Petrov")
                 .login("snaomi")
-                .role(Role.Administrator)
+                .role(Role.ADMINISTRATOR)
                 .password("11111")
                 .build();
 
@@ -100,7 +100,7 @@ class RestfulTestApplicationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Petr"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Petrov"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.login").value("snaomi"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("Administrator"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("ADMINISTRATOR"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("11111"))
                 .andExpect(status().isOk());
     }
@@ -111,7 +111,7 @@ class RestfulTestApplicationTests {
                 .firstName("Dmitriy")
                 .lastName("Petrov")
                 .login("Hemelia")
-                .role(Role.Teacher)
+                .role(Role.TEACHER)
                 .password("11111")
                 .build();
 
@@ -126,7 +126,7 @@ class RestfulTestApplicationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Dmitriy"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Petrov"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.login").value("Hemelia"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("Teacher"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("TEACHER"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("11111"))
                 .andExpect(status().isCreated()).andReturn().getResponse();
 

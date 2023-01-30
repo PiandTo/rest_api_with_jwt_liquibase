@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+    <!--    <include file="classpath:/static/sql/schema.sql"/>-->
+    <changeSet author="snaomi" id="1.1.4">
+        <createTable tableName="access_token">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="login" type="VARCHAR(50)"/>
+            <column name="password" type="TEXT"/>
+            <column name="is_expired" type="BOOLEAN"/>
+        </createTable>
+        <createTable tableName="refresh_token">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="login" type="VARCHAR(50)"/>
+            <column name="password" type="TEXT"/>
+            <column name="is_expired" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @ToString(onlyExplicitlyIncluded=true)
 @Setter
@@ -21,21 +19,29 @@ public class Course extends BaseEntity{
     private String name;
     private String description;
 
-    @ManyToMany()
-    @JoinTable (name = "course_teacher",
+    @JsonIgnore
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.DETACH }, fetch = FetchType.LAZY)
+    @JoinTable (name = "teachers_courses", schema = "restful",
             joinColumns = {@JoinColumn(name = "course_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "teacher_id", referencedColumnName = "id")})
-    private List<User> teachers = new ArrayList<>();
+    private Set<User> teachers = new HashSet<>();
 
-    @ManyToMany()
-    @JoinTable (name = "course_student",
+    @JsonIgnore
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.DETACH }, fetch = FetchType.LAZY)
+    @JoinTable (name = "students_courses", schema = "restful",
             joinColumns = {@JoinColumn(name = "course_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id", referencedColumnName = "id")})
-    private List<User> students = new ArrayList<>();
+    private Set<User> students = new HashSet<>();
 
-    @ManyToMany()
-    @JoinTable (name = "course_lesson",
+    @JsonIgnore
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.DETACH }, fetch = FetchType.LAZY)
+    @JoinTable (name = "lessons_courses", schema = "restful",
         joinColumns = {@JoinColumn(name = "course_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "lesson_id", referencedColumnName = "id")})
-    private List<Lesson> lessons = new ArrayList<>();
+    private Set<Lesson> lessons = new HashSet<>();
+
+    public void addLessonToCourse(Lesson l) {
+        this.getLessons().add(l);
+        l.getCourses().add(this);
+    }
 }

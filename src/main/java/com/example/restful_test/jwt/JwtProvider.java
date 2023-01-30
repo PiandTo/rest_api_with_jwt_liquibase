@@ -48,6 +48,8 @@ public class JwtProvider {
         Date accessExpiration = Date.from(accessExpirationInstant);
         return Jwts.builder()
                 .setSubject(user.getLogin())
+                .setIssuer("Snaomi")
+                .claim("Issued at", new Date())
                 .setExpiration(accessExpiration)
                 .signWith(jwtAccessSecret)
                 .claim("role", user.getRole())

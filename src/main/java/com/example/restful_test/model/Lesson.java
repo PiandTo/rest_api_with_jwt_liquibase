@@ -1,5 +1,6 @@
 package com.example.restful_test.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,11 +19,14 @@ import java.util.List;
 public class Lesson extends BaseEntity{
     private LocalTime startTime;
     private LocalTime endTime;
-    private String dayOfWeek;
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek dayOfWeek;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.PERSIST })
+    @JoinColumn(name = "teacher_id")
     private User teacher;
 
-    @ManyToMany(mappedBy = "lessons")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "lessons", cascade = { CascadeType.DETACH, CascadeType.PERSIST })
     private List<Course> courses = new ArrayList<>();
 }
