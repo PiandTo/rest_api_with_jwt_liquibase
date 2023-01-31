@@ -39,5 +39,9 @@ INSERT INTO restful.lessons_courses (lesson_id, course_id) VALUES (12,30);
 INSERT INTO restful.lessons_courses (lesson_id, course_id) VALUES (13,20);
 
 INSERT INTO restful.students_courses (student_id, course_id) VALUES (10,20);
+INSERT INTO restful.students_courses (student_id, course_id) VALUES (10,30);
+INSERT INTO restful.students_courses (student_id, course_id) VALUES (30,20);
+INSERT INTO restful.students_courses (student_id, course_id) VALUES (40,20);
 
 INSERT INTO restful.teachers_courses(teacher_id, course_id) VALUES (40, 10);
+INSERT INTO restful.teachers_courses(teacher_id, course_id) VALUES (20, 30);

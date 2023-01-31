@@ -31,7 +31,6 @@ public class LessonService {
         this.lessonRepository = lessonRepository;
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
-
     }
 
     public Iterable<Lesson> getAllByCourse(Integer pageNo, Integer pageSize, String sortBy, long id) {
@@ -82,6 +81,20 @@ public class LessonService {
         oldLesson.setEndTime(newLesson.getFinishTime());
         oldLesson.setTeacher(teacher.get());
         return lessonRepository.save(oldLesson);
+    }
+
+    public void deleteLessonFromCourse(long course_id, long lesson_id) {
+        Optional<Lesson> lesson = lessonRepository.findById(lesson_id);
+        Optional<Course> course = courseRepository.findById(course_id);
+        if (!course.isPresent()) {
+            throw new CourseNotSavedException("No such course with id " + course_id);
+        }
+        if (lesson.isPresent()) {
+            lesson.get().getTeacher().removeLessonFromTeacher(lesson.get());
+            course.get().removeLessonFromCourse(lesson.get());
+            lessonRepository.delete(lesson.get());
+        }
+        throw new LessonNotFoundException("No such lesson with id " + lesson_id);
     }
 
     private Lesson convertDtoToLesson(LessonDto l) {

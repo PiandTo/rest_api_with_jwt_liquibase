@@ -44,4 +44,9 @@ public class Course extends BaseEntity{
         this.getLessons().add(l);
         l.getCourses().add(this);
     }
+
+    public void removeLessonFromCourse(Lesson l) {
+        this.getLessons().remove(l);
+        l.getCourses().remove(this);
+    }
 }

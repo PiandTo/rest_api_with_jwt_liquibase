@@ -21,7 +21,7 @@ public class User extends BaseEntity{
     private String firstName;
     private String lastName;
     @Enumerated(value = EnumType.STRING)
-    @JsonIgnore
+//    @JsonIgnore
     private Role role;
     @JsonIgnore
     private String login;
@@ -73,6 +73,10 @@ public class User extends BaseEntity{
     public void addLessonToTeacher(Lesson lesson) {
         lessons.add(lesson);
         lesson.setTeacher(this);
+    }
+
+    public void removeLessonFromTeacher(Lesson l) {
+        lessons.remove(l);
     }
 
 
