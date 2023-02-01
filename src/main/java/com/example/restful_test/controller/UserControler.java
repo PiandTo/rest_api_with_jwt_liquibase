@@ -70,6 +70,4 @@ public class UserControler {
         log.info("Delete method - deleteUser function delete user with id " + id);
         userService.deleteUser(id);
     }
-
-
 }

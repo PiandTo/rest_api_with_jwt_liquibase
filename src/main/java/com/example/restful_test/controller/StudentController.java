@@ -40,4 +40,13 @@ public class StudentController {
 			return ResponseEntity.ok().body(addedStudent);
 	}
 
+	@DeleteMapping("/{course_id}/students/{student_id}")
+	@Operation(summary = "Удаление Студента из Курса")
+	public ResponseEntity<?> deleteStudentFromCourse(
+			@PathVariable("course_id") long course_id,
+			@PathVariable("student_id") long student_id
+	) {
+		studentService.deleteStudentFromCourse(course_id, student_id);
+		return ResponseEntity.ok().build();
+	}
 }

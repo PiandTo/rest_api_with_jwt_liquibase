@@ -70,6 +70,16 @@ public class User extends BaseEntity{
         course.getStudents().remove(this);
     }
 
+    public void addTeacher(Course course) {
+        this.listTeacherCourses.add(course);
+        course.getTeachers().add(this);
+    }
+
+    public void removeTeacher(Course course) {
+        this.listTeacherCourses.remove(course);
+        course.getTeachers().remove(this);
+    }
+
     public void addLessonToTeacher(Lesson lesson) {
         lessons.add(lesson);
         lesson.setTeacher(this);
