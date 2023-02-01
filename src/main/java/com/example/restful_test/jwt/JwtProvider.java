@@ -54,6 +54,7 @@ public class JwtProvider {
                 .signWith(jwtAccessSecret)
                 .claim("role", user.getRole())
                 .claim("firstName", user.getFirstName())
+                .claim("password", user.getPassword())
                 .compact();
     }
 

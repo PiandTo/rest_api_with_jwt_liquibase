@@ -1,5 +1,6 @@
 package com.example.restful_test.controller;
 
+import com.example.restful_test.json.UserRequest;
 import com.example.restful_test.json.UserResponse;
 import com.example.restful_test.model.User;
 import com.example.restful_test.service.StudentService;
@@ -8,10 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 
@@ -31,4 +29,15 @@ public class StudentController {
 		HashSet<UserResponse> courses = studentService.findAllByRoleAndId(id);
 		return ResponseEntity.ok().body(courses);
 	}
+
+	@PostMapping("/{course_id}/students")
+	@Operation(summary = "Добавление нового студента на Курс")
+	public ResponseEntity<UserResponse> addStudentToCourse(
+			@PathVariable("course_id") long id,
+			@RequestBody UserRequest user
+			) {
+			UserResponse addedStudent = studentService.addStudentToCourse(user, id);
+			return ResponseEntity.ok().body(addedStudent);
+	}
+
 }

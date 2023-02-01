@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
@@ -20,6 +21,7 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends GenericFilterBean {
+
     private final JwtProvider jwtProvider;
     private static final String AUTHORIZATION = "Authorization";
 
@@ -36,6 +38,7 @@ public class JwtFilter extends GenericFilterBean {
             JwtAuthentication jwtAuthentication = new JwtAuthentication();
             jwtAuthentication.setRole("user");
             jwtAuthentication.setFirstName(claims.get("firstName", String.class));
+            jwtAuthentication.setPassword(claims.get("password", String.class));
             jwtAuthentication.setUsername(claims.getSubject());
             jwtAuthentication.setAuthenticated(true);
             SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
